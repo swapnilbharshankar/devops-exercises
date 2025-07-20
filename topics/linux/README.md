@@ -11,7 +11,6 @@ Disclaimer: developed by repository owner
   - [Linux Master Application](#linux-master-application)
   - [Linux Exercises](#linux-exercises)
     - [Basics](#basics)
-    - [Misc](#misc)
   - [Linux Questions](#linux-questions)
     - [Linux 101](#linux-101)
     - [I/O Redirection](#io-redirection)
@@ -56,12 +55,6 @@ Disclaimer: developed by repository owner
 | Navigation | cd, pwd | [Exercise](exercises/navigation/README.md) | [Solution](exercises/navigation/solution.md)
 | Create and Destroy | touch, rm, mkdir | [Exercise](exercises/create_remove/README.md) | [Solution](exercises/create_remove/solution.md)
 | Copy Time | touch, cp, ls | [Exercise](exercises/copy/README.md) | [Solution](exercises/copy/solution.md)
-
-### Misc
-
-|Name|Topic|Objective & Instructions|Solution|Comments|
-|--------|--------|------|----|----|
-| Unique Count |  | [Exercise](exercises/uniqe_count/README.md) | [Solution](exercises/uniqe_count/solution.md)
 
 ## Linux Questions
 
@@ -116,21 +109,6 @@ Disclaimer: developed by repository owner
   * cd .. -> change to the directory above your current i.e parent directory
   * cd . -> change to the directory you currently in
   * cd - -> change to the last visited path
-</b></details>
-
-<details>
-<summary>Some of the commands in the previous question can be run with the -r/-R flag. What does it do? Give an example to when you would use it</summary><br><b>
-
-The -r (or -R in some commands) flag allows the user to run a certain command recursively. For example, listing all the files under the following tree is possible when done recursively (`ls -R`):
-
-/dir1/
-  dir2/
-    file1
-    file2
-  dir3/
-    file3
-
-To list all the files, one can run `ls -R /dir1`
 </b></details>
 
 <details>
@@ -242,26 +220,6 @@ history command or .bash_history file
 </b></details>
 
 <details>
-<summary>Running the command <code>df</code> you get "command not found". What could be wrong and how to fix it?</summary><br><b>
-</b>
-<p><b>
-Most likely the default/generated $PATH was somehow modified or overridden thus not containing <code>/bin/</code> where df would normally go.
-This issue could also happen if bash_profile or any configuration file of your interpreter was wrongly modified, causing erratics behaviours.
-You would solve this by fixing your $PATH variable:
-
-As to fix it there are several options:
-
-1. Manually adding what you need to your $PATH <code>PATH="$PATH":/user/bin:/..etc</code>
-2. You have your weird env variables backed up.
-3. You would look for your distro default $PATH variable, copy paste using method #1
-
-Note: There are many ways of getting errors like this: if bash_profile or any configuration file of your interpreter was wrongly modified; causing erratics behaviours,
-permissions issues, bad compiled software (if you compiled it by yourself)... there is no answer that will be true 100% of the time.
-</b>
-</p>
-</details>
-
-<details>
 <summary>How do you schedule tasks periodically?</summary><br><b>
 
 You can use the commands <code>cron</code> and <code>at</code>.
@@ -312,13 +270,6 @@ Here are some common examples of IO redirection:
 <summary>Demonstrate Linux stderr to stdout redirection</summary><br><b>
 
 <code>yippiekaiyay &> file</code>
-</b></details>
-
-<details>
-<summary>What is the result of running the following command? <code>yippiekaiyay 1>&2 die_hard</code></code></summary><br><b>
-
-An output similar to: `yippikaiyay: command not found...`<br>
-The file `die_hard` will not be created
 </b></details>
 
 <a name="questions-linux-fhs"></a>
@@ -458,12 +409,6 @@ True
 * No permissions
 </b></details>
 
-<details>
-<summary>A user accidentally executed the following <code>chmod -x $(which chmod)</code>. How to fix it?</summary><br><b>
-
-Using `sudo setfacl -m u::rx /usr/bin/chmod` will set the execute permissions on `chmod` for all the users. Post this, the `chmod` binary can be used as usual.
-</b></details>
-
 <a name="questions-linux-scenarios"></a>
 ### Scenarios
 
@@ -473,17 +418,6 @@ Using `sudo setfacl -m u::rx /usr/bin/chmod` will set the execute permissions on
 There are multiple ways to transfer files between hosts. Personal opinion: use `rsync`
 </b></details>
 
-<details>
-<summary>How to generate a random string?</summary><br><b>
-
-One way is to run the following: `cat /proc/sys/kernel/random/uuid`
-</b></details>
-
-<details>
-<summary>How to generate a random string of 7 characters?</summary><br><b>
-
-`mkpasswd -l 7`
-</b></details>
 
 <a name="questions-linux-systemd"></a>
 ### Systemd
@@ -516,15 +450,6 @@ To stop a service: `systemctl stop <service name>`
 `systemctl status <service name>`
 </b></details>
 
-<details>
-<summary>On a system which uses systemd, how would you display the logs?</summary><br><b>
-
-<code>journalctl</code>
-</b></details>
-
-<details>
-<summary>Describe how to make a certain process/app a service</summary><br><b>
-</b></details>
 
 ### Troubleshooting and Debugging
 
@@ -541,71 +466,13 @@ tail -f <file_name>
 </b></details>
 
 <details>
-<summary>What are you using for troubleshooting and debugging <b>network</b> issues?</summary><br><b>
-
-<code>dstat -t</code> is great for identifying network and disk issues.
-<code>netstat -tnlaup</code> can be used to see which processes are running on which ports.
-<code>lsof -i -P</code> can be used for the same purpose as netstat.
-<code>ngrep -d any metafilter</code> for matching regex against payloads of packets.
-<code>tcpdump</code> for capturing packets
-<code>wireshark</code> same concept as tcpdump but with GUI (optional).
-</b></details>
-
-<details>
-<summary>What are you using for troubleshooting and debugging <b>disk & file system</b> issues?</summary><br><b>
-
-<code>dstat -t</code> is great for identifying network and disk issues.
-<code>opensnoop</code> can be used to see which files are being opened on the system (in real time).
-</b></details>
-
-<details>
-<summary>What are you using for troubleshooting and debugging <b>process</b> issues?</summary><br><b>
-
-<code>strace</code> is great for understanding what your program does. It prints every system call your program executed.
-</b></details>
-
-<details>
 <summary>What are you using for debugging CPU related issues?</summary><br><b>
 
 <code>top</code> will show you how much CPU percentage each process consumes
-<code>perf</code> is a great choice for sampling profiler and in general, figuring out what your CPU cycles are "wasted" on
-<code>flamegraphs</code> is great for CPU consumption visualization (http://www.brendangregg.com/flamegraphs.html)
-</b></details>
-
-<details>
-<summary>You get a call from someone claiming "my system is SLOW". What do you do?</summary><br><b>
-
-* Check with `top` for anything unusual
-* Run `dstat -t` to check if it's related to disk or network.
-* Check if it's network related with `sar`
-* Check I/O stats with `iostat`
-</b></details>
-
-<details>
-<summary>Explain iostat output</summary><br><b>
-</b></details>
-
-<details>
-<summary>How to debug binaries?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What is the difference between CPU load and utilization?</summary><br><b>
-</b></details>
-
-<details>
-<summary>How you measure time execution of a program?</summary><br><b>
 </b></details>
 
 #### Scenarios
 
-<details>
-<summary>You have a process writing to a file. You don't know which process exactly, you just know the path of the file. You would like to kill the process as it's no longer needed. How would you achieve it?</summary><br><b>
-
-1. Run `lsof <FILE_PATH>`
-2. Use the pid (process ID) from the lsof command and run `kill <PID>`
-
-</b></details>
 
 ### Kernel
 
@@ -623,83 +490,6 @@ The kernel is part of the operating system and is responsible for tasks like:
 <summary>How do you find out which Kernel version your system is using?</summary><br><b>
 
 `uname -a` command
-</b></details>
-
-<details>
-<summary>What is a Linux kernel module and how do you load a new module?</summary><br><b>
-
-A Linux kernel module is a piece of code that can be dynamically loaded into the kernel to extend its functionality. These modules are typically used to add support for hardware devices, filesystems, or system calls. The kernel itself is monolithic, but with modules, its capabilities can be extended without having to reboot the system or recompile the entire kernel.
-</b></details>
-
-<details>
-<summary>Explain user space vs. kernel space</summary><br><b>
-
-The operating system executes the kernel in protected memory to prevent anyone from changing (and risking it crashing). This is what is known as "Kernel space".
-"User space" is where users executes their commands or applications. It's important to create this separation since we can't rely on user applications to not tamper with the kernel, causing it to crash.
-
-Applications can access system resources and indirectly the kernel space by making what is called "system calls".
-</b></details>
-
-<details>
-<summary>In what phases of kernel lifecycle, can you change its configuration?</summary><br><b>
-
-  * Build time (when it's compiled)
-  * Boot time (when it starts)
-  * Runtime (once it's already running)
-</b></details>
-
-<details>
-<summary>Where can you find kernel's configuration?</summary><br><b>
-
-Usually it will reside in `/boot/config-<kernel version>.<os release>.<arch>`
-</b></details>
-
-<details>
-<summary>Where can you find the file that contains the command passed to the boot loader to run the kernel?</summary><br><b>
-
-`/proc/cmdline`
-</b></details>
-
-<details>
-<summary>How to list kernel's runtime parameters?</summary><br><b>
-
-`sysctl -a`
-</b></details>
-
-<details>
-<summary>Will running <code>sysctl -a</code> as a regular user vs. root, produce different result?</summary><br><b>
-
-Yes, you might notice that in most systems, when running `systctl -a` with root, you'll get more runtime parameters compared to executing the same command with a regular user.
-</b></details>
-
-<details>
-<summary>You would like to enable IPv4 forwarding in the kernel, how would you do it?</summary><br><b>
-
-`sudo sysctl net.ipv4.ip_forward=1`
-
-To make it persistent (applied after reboot for example): insert `net.ipv4.ip_forward = 1` into `/etc/sysctl.conf`
-
-Another way to is to run `echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward`
-</b></details>
-
-<details>
-<summary>How <code>sysctl</code> applies the changes to kernel's runtime parameters the moment you run sysctl command?</summary><br><b>
-
-If you `strace` the sysctl command you can see it does it by changing the file under /proc/sys/...
-
-In the past it was done with sysctl system call, but it was deprecated at some point.
-</b></details>
-
-<details>
-<summary>How changes to kernel runtime parameters persist? (applied even after reboot to the system for example)</summary><br><b>
-
-There is a service called `systemd-sysctl` that takes the content of /etc/sysctl.conf and applies it. This is how changes persist, even after reboot, when they are written in /etc/sysctl.conf
-</b></details>
-
-<details>
-<summary>Are the changes you make to kernel parameters in a container, affects also the kernel parameters of the host on which the container runs?</summary><br><b>
-
-No. Containers have their own /proc filesystem so any change to kernel parameters inside a container, are not affecting the host or other containers running on that host.
 </b></details>
 
 <a name="questions-linux-ssh"></a>
@@ -731,10 +521,6 @@ The file stores the key fingerprints for the clients connecting to the SSH serve
 <summary>You try to ssh to a server and you get "Host key verification failed". What does it mean?</summary><br><b>
 
 It means that the key of the remote host was changed and doesn't match the one that stored on the machine (in ~/.ssh/known_hosts).
-</b></details>
-
-<details>
-<summary>What is the difference between SSH and SSL?</summary><br><b>
 </b></details>
 
 <details>
@@ -797,74 +583,10 @@ It shows the key is RSA 4096-bits.
 Learn more : [How can I tell how many bits my ssh key is? - Superuser](https://superuser.com/a/139311)
 </b></details>
 
-<details>
-<summary>What is SSH port forwarding?</summary><br><b>
-</b></details>
 
 <a name="questions-linux-wildcards"></a>
 ### Globbing & Wildcards
 
-<details>
-<summary>What is Globbing?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What are wildcards? Can you give an example of how to use them?</summary><br><b>
-</b></details>
-
-<details>
-<summary>Explain what will <code>ls [XYZ]</code> match</summary><br><b>
-</b></details>
-
-<details>
-<summary>Explain what will <code>ls [^XYZ]</code> match</summary><br><b>
-</b></details>
-
-<details>
-<summary>Explain what will <code>ls [0-5]</code> match</summary><br><b>
-</b></details>
-
-<details>
-<summary>What each of the following matches
-
-  - ?
-  - *</summary><br><b>
-
-  * The ? matches any single character
-  * The * matches zero or more characters
-</b></details>
-
-<details>
-<summary>What do we grep for in each of the following commands?:
-
-  * <code>grep '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' some_file</code>
-  * <code>grep -E "error|failure" some_file</code>
-  * <code>grep '[0-9]$' some_file</code>
-</summary><br><b>
-
-1. An IP address
-2. The word "error" or "failure"
-3. Lines which end with a number
-</b></details>
-
-<details>
-<summary>Which line numbers will be printed when running `grep '\baaa\b'` on the following content:
-
-aaa
-bbb
-ccc.aaa
-aaaaaa</summary><br><b>
-
-lines 1 and 3.
-</b></details>
-
-<details>
-<summary>What is the difference single and double quotes?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What is escaping? What escape character is used for escaping?</summary><br><b>
-</b></details>
 
 <details>
 <summary>What is an exit code? What exit codes are you familiar with?</summary><br><b>
@@ -903,36 +625,6 @@ Another way to ask this: what happens from the moment you turned on the server u
 ### Disk and Filesystem
 
 <details>
-<summary>What's an inode?</summary><br><b>
-
-For each file (and directory) in Linux there is an inode, a data structure which stores meta data
-related to the file like its size, owner, permissions, etc.
-</b></details>
-
-<details>
-<summary>Which of the following is not included in inode:
-
-  * Link count
-  * File size
-  * File name
-  * File timestamp</summary><br><b>
-
-File name (it's part of the directory file)
-</b></details>
-
-<details>
-<summary>How to check which disks are currently mounted?</summary><br><b>
-
-Run `mount`
-</b></details>
-
-<details>
-<summary>You run the <code>mount</code> command but you get no output. How would you check what mounts you have on your system?</summary><br><b>
-
-`cat /proc/mounts`
-</b></details>
-
-<details>
 <summary>What is the difference between a soft link and hard link?</summary><br><b>
 
 Hard link is the same file, using the same inode.
@@ -961,31 +653,6 @@ True.
 <summary>What happens when you delete the original file in case of soft link and hard link?</summary><br><b>
 </b></details>
 
-<details>
-<summary>Can you check what type of filesystem is used in /home?</summary><br><b>
-
-There are many answers for this question. One way is running `df -T`
-</b></details>
-
-<details>
-<summary>What is a swap partition? What is it used for?</summary><br><b>
-</b></details>
-
-<details>
-<summary>How to create a
-
-  - new empty file
-  - a file with text (without using text editor)
-  - a file with given size</summary><br><b>
-  
-  * touch new_file.txt
-  * cat > new_file [enter] submit text; ctrl + d to exit insert mode
-  * truncate -s <size> new_file.txt
-</b></details>
-
-<details>
-<summary>You are trying to create a new file but you get "File system is full". You check with df for free space and you see you used only 20% of the space. What could be the problem?</summary><br><b>
-</b></details>
 
 <details>
 <summary>How would you check what is the size of a certain directory?</summary><br><b>
@@ -993,52 +660,6 @@ There are many answers for this question. One way is running `df -T`
 `du -sh`
 </b></details>
 
-<details>
-<summary>What is LVM?</summary><br><b>
-</b></details>
-
-<details>
-<summary>Explain the following in regards to LVM:
-
-  * PV
-  * VG
-  * LV</summary><br><b>
-
-
-</b></details>
-
-<details>
-<summary>What is NFS? What is it used for?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What RAID is used for? Can you explain the differences between RAID 0, 1, 5 and 10?</summary><br><b>
-</b></details>
-
-<details>
-<summary>Describe the process of extending a filesystem disk space</summary><br><b>
-</b></details>
-
-<details>
-<summary>What is lazy umount?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What is tmpfs?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What is stored in each of the following logs?
-
-  * /var/log/messages
-  * /var/log/boot.log</summary><br><b>
-</b></details>
-
-<details>
-<summary>True or False? both /tmp and /var/tmp cleared upon system boot</summary><br><b>
-
-False. /tmp is cleared upon system boot while /var/tmp is cleared every a couple of days or not cleared at all (depends on distro).
-</b></details>
 
 <a name="questions-linux-performance-analysis"></a>
 ### Performance Analysis
@@ -1056,28 +677,11 @@ One can use `uptime` or `top`
 </b></details>
 
 <details>
-<summary>How to check process usage?</summary><br><b>
-
-pidstat
-</b></details>
-
-<details>
-<summary>How to check disk I/O?</summary><br><b>
-
-`iostat -xz 1`
-</b></details>
-
-<details>
 <summary>How to check how much free memory a system has? How to check memory consumption by each process?</summary><br><b>
 
 You can use the commands <code>top</code> and <code>free</code>
 </b></details>
 
-<details>
-<summary>How to check TCP stats?</summary><br><b>
-
-sar -n TCP,ETCP 1
-</b></details>
 
 <a name="questions-linux-processes"></a>
 ### Processes
@@ -1088,359 +692,14 @@ sar -n TCP,ETCP 1
 The "ps" command can be used to list all the processes running in a system. The "ps aux" command provides a detailed list of all the processes, including the ones running in the background.
 </b></details>
 
-<details>
-<summary>How to run a process in the background and why to do that in the first place?</summary><br><b>
-
-You can achieve that by specifying & at the end of the command.
-As to why, since some commands/processes can take a lot of time to finish
-execution or run forever, you may want to run them in the background instead of waiting for them to finish before gaining control again in current session.
-</b></details>
-
-<details>
-<summary>How can you find how much memory a specific process consumes?</summary><br><b>
-<code>
-mem()
-{                                                                                                      
-    ps -eo rss,pid,euser,args:100 --sort %mem | grep -v grep | grep -i $@ | awk '{printf $1/1024 "MB"; $1=""; print }'
-}
-</code>
-[Source](https://stackoverflow.com/questions/3853655/in-linux-how-to-tell-how-much-memory-processes-are-using)
-</b></details>
-
-<details>
-<summary>What signal is used by default when you run 'kill *process id*'?</summary><br><b>
-<pre>
-The default signal is SIGTERM (15). This signal kills
-process gracefully which means it allows it to save current
-state configuration.
-</pre>
-</b></details>
-
-<details>
-<summary>What signals are you familiar with?</summary><br><b>
-
-SIGTERM - default signal for terminating a process
-SIGHUP - common usage is for reloading configuration
-SIGKILL - a signal which cannot caught or ignored
-
-To view all available signals run `kill -l`
-</b></details>
-
-<details>
-<summary>What <code>kill 0</code> does?</summary><br><b>
-"kill 0" sends a signal to all processes in the current process group. It is used to check if the processes exist or not
-</b></details>
-
-<details>
-<summary>What <code>kill -0 <PID></code> does?</summary><br><b>
-"kill -0" checks if a process with a given process ID exists or not. It does not actually send any signal to the process.
-</b></details>
-
-<details>
-<summary>What is a trap?</summary><br><b>
-A trap is a mechanism that allows the shell to intercept signals sent to a process and perform a specific action, such as handling errors or cleaning up resources before terminating the process.
-
-</b></details>
-
-<details>
-<summary>Every couple of days, a certain process stops running. How can you look into why it's happening?</summary><br><b>
-One way to investigate why a process stops running is to check the system logs, such as the messages in /var/log/messages or journalctl. Additionally, checking the process's resource usage and system load may provide clues as to what caused the process to stop
-</b></details>
-
-<details>
-<summary>What happens when you press ctrl + c?</summary><br><b>
-When you press "Ctrl+C," it sends the SIGINT signal to the foreground process, asking it to terminate gracefully.
-</b></details>
-
-<details>
-<summary>What is a Daemon in Linux?</summary><br><b>
-
-A background process. Most of these processes are waiting for requests or set of conditions to be met before actually running anything.
-Some examples: sshd, crond, rpcbind.
-</b></details>
-
-<details>
-<summary>What are the possible states of a process in Linux?</summary><br><b>
-<pre>
-Running (R)
-Uninterruptible Sleep (D) - The process is waiting for I/O
-Interruptible Sleep (S)
-Stopped (T)
-Dead (x)
-Zombie (z)
-</pre>
-</b></details>
-
-<details>
-<summary>How do you kill a process in D state?</summary><br><b>
-A process in D state (also known as "uninterruptible sleep") cannot be killed using the "kill" command. The only way to terminate it is to reboot the system.
-</b></details>
-
-<details>
-<summary>What is a zombie process?</summary><br><b>
-
-A process which has finished to run but has not exited.
-
-One reason it happens is when a parent process is programmed incorrectly. Every parent process should execute wait() to get the exit code from the child process which finished to run. But when the parent isn't checking for the child exit code, the child process can still exists although it finished to run.
-</b></details>
-
-<details>
-<summary>How to get rid of zombie processes?</summary><br><b>
-
-You can't kill a zombie process the regular way with `kill -9` for example as it's already dead.
-
-One way to kill zombie process is by sending SIGCHLD to the parent process telling it to terminate its child processes. This might not work if the parent process wasn't programmed properly. The invocation is `kill -s SIGCHLD [parent_pid]`
-
-You can also try closing/terminating the parent process. This will make the zombie process a child of init (1) which does periodic cleanups and will at some point clean up the zombie process.
-</b></details>
-
-<details>
-<summary>How to find all the
-
-  * Processes executed/owned by a certain user
-  * Process which are Java processes
-  * Zombie Processes
-</summary><br><b>
-
-If you mention at any point ps command with arguments, be familiar with what these arguments does exactly.
-</b></details>
-
-<details>
-<summary>What is the init process?</summary><br><b>
-It is the first process executed by the kernel during the booting of a system. It is a daemon process which runs till the system is shutdown. That is why, it is the parent of all the processes
-</b></details>
-
-<details>
-<summary>Can you describe how processes are being created?</summary><br><b>
-</b></details>
-
-<details>
-<summary>How to change the priority of a process? Why would you want to do that?</summary><br><b>
-To change the priority of a process, you can use the nice command in Linux. The nice command allows you to specify the priority of a process by assigning a priority value ranging from -20 to 19. A higher value of priority means lower priority for the process, and vice versa.
-
-You may want to change the priority of a process to adjust the amount of CPU time it is allocated by the system scheduler. For example, if you have a CPU-intensive process running on your system that is slowing down other processes, you can lower its priority to give more CPU time to other processes.
-</b></details>
-
-<details>
-<summary>Can you explain how network process/connection is established and how it's terminated?></summary><br></b>
-When a client process on one system wants to establish a connection with a server process on another system, it first creates a socket using the socket system call. The client then calls the connect system call, passing the address of the server as an argument. This causes a three-way handshake to occur between the client and server, where the two systems exchange information to establish a connection.
-
-Once the connection is established, the client and server can exchange data using the read and write system calls. When the connection is no longer needed, the client or server can terminate the connection by calling the close system call on the socket.
-</b></details>
-
-<details>
-<summary>What <code>strace</code> does? What about <code>ltrace</code>?</summary><br><b>
-Strace is a debugging tool that is used to monitor the system calls made by a process. It allows you to trace the execution of a process and see the system calls it makes, as well as the signals it receives. This can be useful for diagnosing issues with a process, such as identifying why it is hanging or crashing.
-
-Ltrace, on the other hand, is a similar tool that is used to trace the library calls made by a process. It allows you to see the function calls made by a process to shared libraries, as well as the arguments passed to those functions. This can be useful for diagnosing issues with a process that involve library calls, such as identifying why a particular library is causing a problem.
-
-</b></details>
-
-<details>
-<summary>Find all the files which end with '.yml' and replace the number 1 in 2 in each file</summary><br><b>
-
-find /some_dir -iname \*.yml -print0 | xargs -0 -r sed -i "s/1/2/g"
-</b></details>
-
-<details>
-<summary>You run ls and you get "/lib/ld-linux-armhf.so.3 no such file or directory". What is the problem?</summary><br><b>
-
-The ls executable is built for an incompatible architecture.
-</b></details>
-
-<details>
-<summary>How would you split a 50 lines file into 2 files of 25 lines each?</summary><br><b>
-
-You can use the <code>split</code> command this way: <code>split -l 25 some_file</code>
-</b></details>
-
-<details>
-<summary>What is a file descriptor? What file descriptors are you familiar with?</summary><br><b>
-Kerberos
-File descriptor, also known as file handler, is a unique number which identifies an open file in the operating system.
-
-In Linux (and Unix) the first three file descriptors are:
-
-  * 0 - the default data stream for input
-  * 1 - the default data stream for output
-  * 2 - the default data stream for output related to errors
-
-This is a great article on the topic: https://www.computerhope.com/jargon/f/file-descriptor.htm
-</b></details>
-
-<details>
-<summary>What is NTP? What is it used for?</summary><br><b>
-</b></details>
-
-<details>
-<summary>Explain Kernel OOM</summary><br><b>
-</b></details>
-
 <a name="questions-linux-security"></a>
 ### Security
 
-<details>
-<summary>What is chroot? In what scenarios would you consider using it?</summary><br><b>
-</b></details>
 
-<details>
-<summary>What is SELiunx?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What is Kerberos?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What is nftables?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What firewalld daemon is responsible for?</summary><br><b>
-</b></details>
-
-<details>
-<summary>Do you have experience with hardening servers? Can you describe the process?</summary><br><b>
-</b></details>
-
-<details>
-<summary>How do you create a private key for a CA (certificate authority)?</summary><br><b>
-
-One way is using openssl this way:
-
-`openssl genrsa -aes256 -out ca-private-key.pem 4096`
-</b></details>
-
-<details>
-<summary>How do you create a public key for a CA (certificate authority)?</summary><br><b>
-
-`openssl req -new -x509 -days 730 -key [private key file name] -sha256 -out ca.pem`
-
-If using the private key from the previous question then the command would be:
-
-`openssl req -new -x509 -days 730 -key ca-private-key.pem -sha256 -out ca.pem`
-</b></details>
-
-<details>
-<summary>Demonstrate one way to encode and decode data in Linux</summary><br><b>
-
-Encode: `echo -n "some password" | base64`
-Decode: `echo -n "allE19remO91" | base64`
-</b></details>
 
 <a name="questions-linux-networking"></a>
 ### Networking
 
-<details>
-<summary>How to list all the interfaces?</summary><br><b>
-
-```
-ip link show
-```
-</b></details>
-
-<details>
-<summary>What is the loopback (lo) interface?</summary><br><b>
-
-The loopback interface is a special, virtual network interface that your computer uses to communicate with itself. It is used mainly for diagnostics and troubleshooting, and to connect to servers running on the local machine.
-</b></details>
-
-<details>
-<summary>What the following commands are used for?
-
-  * ip addr
-  * ip route
-  * ip link
-  * ping
-  * netstat
-  * traceroute</summary><br><b>
-</b></details>
-
-<details>
-<summary>What is a network namespace? What is it used for?</summary><br><b>
-</b></details>
-
-<details>
-<summary>How to check if a certain port is being used?</summary><br><b>
-
-One of the following would work:
-
-```
-netstat -tnlp | grep <port_number>
-lsof -i -n -P | grep <port_number>
-```
-</b></details>
-
-<details>
-<summary>How can you turn your Linux server into a router?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What is a virtual IP? In what situation would you use it?</summary><br><b>
-</b></details>
-
-<details>
-<summary>True or False? The MAC address of an interface is assigned/set by the OS</summary><br><b>
-
-False
-</b></details>
-
-<details>
-<summary>Can you have more than one default gateway in a given system?</summary><br><b>
-
-Technically, yes.
-</b></details>
-
-<details>
-<summary>What is telnet and why is it a bad idea to use it in production? (or at all)</summary><br><b>
-
-Telnet is a type of client-server protocol that can be used to open a command line on a remote computer, typically a server.
-By default, all the data sent and received via telnet is transmitted in clear/plain text, therefore it should not be used as it does not encrypt any data between the client and the server.
-</b></details>
-
-<details>
-<summary>What is the routing table? How do you view it?</summary><br><b>
-</b></details>
-
-<details>
-<summary>How can you send an HTTP request from your shell?</summary><br><b>
-<br>
-Using nc is one way<br>
-</b></details>
-
-<details>
-<summary>What are packet sniffers? Have you used one in the past? If yes, which packet sniffers have you used and for what purpose?</summary><br><b>
-It is a network utility that analyses and may inject tasks into the data-stream travelling over the targeted network.
-</b></details>
-
-<details>
-<summary>How to list active connections?</summary><br><b>
-</b></details>
-
-<details>
-<summary>How to trigger neighbor discovery in IPv6?</summary><br><b>
-
-One way would be `ping6 ff02::1`
-</b></details>
-
-<details>
-<summary>What is network interface bonding and do you know how it's performed in Linux?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What network bonding modes are there?</summary><br><b>
-
-There a couple of modes:
-
-  * balance-rr: round robing bonding
-  * active-backup: a fault tolerance mode where only one is active
-  * balance-tlb: Adaptive transmit load balancing
-  * balance-alb: Adaptive load balancing
-</b></details>
-
-<details>
-<summary>What is a bridge? How it's added in Linux OS?</summary><br><b>
-</b></details>
 
 <a name="questions-linux-dns"></a>
 ### DNS
@@ -1467,92 +726,10 @@ You can specify one or more of the following:
  * <code>nslookup</code>
 </b></details>
 
-<details>
-<summary>You run <code>dig codingshell.com</code> and get the following result: 
 
-```
-ANSWER SECTION:
-codingshell.com.	3515	IN	A	185.199.109.153
-```
-
-What is the meaning of the number 3515?
-</summary><br><b>
-
-This is the TTL. When you lookup for an address using a domain/host name, your OS is performing DNS resolution by contacting DNS name servers to get the IP address of the host/domain you are looking for.<br>
-When you get a reply, this reply in cached in your OS for a certain period of time. This is period of time is also known as TTL and this is the meaning of 3515 number - it will be cached for 3515 seconds before removed from the cache and during that period of time, you'll get the value from the cache instead of asking DNS name servers for the address again.
-</b></details>
-
-<details>
-
-<summary> How can we modify the network connection via `nmcli` command, to use `8.8.8.8` as a DNS server? </summary><br><b>
-
-1. Find the connection name: 
-    ```
-    # nmcli con show
-    NAME         UUID                                  TYPE      DEVICE
-    System ens5  8126c120-a964-e959-ff98-ac4973344505  ethernet  ens5
-    System eth0  5fb06bd0-0bb0-7ffb-45f1-d6edd65f3e03  ethernet  --
-    ```
-    Here the connection name is "System ens5". Let's say we want to modify settings for this connection.
-
-2. Modify the connection to use 8.8.8.8 as DNS server:
-    ```
-    # nmcli con mod "System ens5" ipv4.dns "8.8.8.8"
-    ```
-
-3. We need to reactivate the connection for the change to take effect:
-    ```
-    nmcli con up "System ens5"
-    ```
-
-4. Verify our settings once more:
-    ```
-    cat /etc/resolv.conf
-    nmcli -f ipv4.dns con show "System ens5"
-    ```
-</b>
-
-</details>
  
 <a name="questions-linux-packaging"></a>
 ### Packaging
-
-<details>
-<summary>Do you have experience with packaging? (as in building packages) Can you explain how does it works?</summary><br><b>
-</b></details>
-
-<details>
-<summary>How packages installation/removal is performed on the distribution you are using?</summary><br><b>
-
-The answer depends on the distribution being used.
-
-In Fedora/CentOS/RHEL/Rocky it can be done with `rpm` or `dnf` commands.
-In Ubuntu it can be done with the `apt` command.
-</b></details>
-
-<details>
-<summary>RPM: explain the spec format (what it should and can include)</summary><br><b>
-</b></details>
-
-<details>
-<summary>How do you list the content of a package without actually installing it?</summary><br><b>
-</b></details>
-
-<details>
-<summary>How to know to which package a file on the system belongs to? Is it a problem if it doesn't belongs to any package?</summary><br><b>
-</b></details>
-
-<details>
-<summary>Where repositories are stored? (based on the distribution you are using)</summary><br><b>
-</b></details>
-
-<details>
-<summary>What is an archive? How do you create one in Linux?</summary><br><b>
-</b></details>
-
-<details>
-<summary>How to extract the content of an archive?</summary><br><b>
-</b></details>
 
 <details>
 <summary>Why do we need package managers? Why not simply creating archives and publish them?</summary><br><b>
@@ -1585,35 +762,6 @@ dnf provides /usr/bin/git
 ### Applications and Services
 
 <details>
-<summary>What can you find in /etc/services?</summary><br><b>
-</b></details>
-
-<details>
-<summary>How to make sure a Service starts automatically after a reboot or crash?</summary><br><b>
-
-Depends on the init system.
-
-Systemd: <code> systemctl enable [service_name] </code>
-System V: <code> update-rc.d [service_name] </code> and add this line <code> id:5678:respawn:/bin/sh /path/to/app </code> to /etc/inittab
-Upstart: add Upstart init script at /etc/init/service.conf
-</b></details>
-
-<details>
-<summary>You run <code>ssh 127.0.0.1</code> but it fails with "connection refused". What could be the problem?</summary><br><b>
-
-1. SSH server is not installed
-2. SSH server is not running
-</b></details>
-
-<details>
-<summary>How to print the shared libraries required by a certain program? What is it useful for?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What is CUPS?</summary><br><b>
-</b></details>
-
-<details>
 <summary>What types of web servers are you familiar with?</summary><br><b>
 
 Nginx, Apache httpd.
@@ -1621,10 +769,6 @@ Nginx, Apache httpd.
 
 <a name="questions-linux-users-and-groups"></a>
 ### Users and Groups
-
-<details>
-<summary>What is a "superuser" (or root user)? How is it different from regular users?</summary><br><b>
-</b></details>
 
 <details>
 <summary>How do you create users? Where user information is stored?</summary><br>
@@ -1659,26 +803,6 @@ There are 2 configuration files, which stores users information
 `/etc/shadow` file holds the passwords of the users in encrypted format. NO, it is only visible to the `root` user
 </details>
 
-<details>
-<summary>Do you know how to create a new user without using adduser/useradd command?</summary><br>
-
-YES, we can create new user by manually adding an entry in the `/etc/passwd` file. 
-
-For example, if we need to create a user called `john`. 
-
-Step 1: Add an entry to `/etc/passwd` file, so user gets created.
-
-`echo "john:x:2001:2001::/home/john:/bin/bash" >> /etc/passwd` 
-
-Step 2: Add an entry to `/etc/group` file, because every user belong to the primary group that has same name as the username.
-
-`echo "john:x:2001:" >> /etc/group`
-
-Step 3: Verify if the user got created
-
-`id john`
-
-</details>
 
 <details>
 <summary>What information is stored in /etc/passwd? explain each field</summary><br>
@@ -1730,24 +854,6 @@ Therefore, as per the default configuration, for regular user UID starts from `1
 </details>
 
 <details>
-<summary>What can you do if you lost/forogt the root password?</summary><br><b>
-
-Re-install the OS IS NOT the right answer :)
-</b></details>
-
-<details>
-<summary>What is /etc/skel?</summary><br>
-
-`/etc/skel` is a directory, that contains files or directories, so when a new user is created, these files/directories created under `/etc/skel` will be copied to user's home directory.
-</details>
-
-<details>
-<summary>How to see a list of who logged-in to the system?</summary><br><b>
-
-Using the `last` command.
-</b></details>
-
-<details>
 <summary>Explain what each of the following commands does:
 
   * useradd
@@ -1761,12 +867,6 @@ Using the `last` command.
   `id`      - Prints the  
 </b></details>
 
-<details>
-<summary>You run <code>grep $(whoami) /etc/passwd</code> but the output is empty. What might be a possible reason for that?</summary><br><b>
-
-The user you are using isn't defined locally but originates from services like LDAP.<br>
-You can verify with: `getent passwd`
-</b></details>
 
 <a name="questions-linux-hardware"></a>
 ### Hardware
@@ -1779,465 +879,41 @@ You can verify with: `getent passwd`
 You can also use `nproc` for number of processors
 </b></details>
 
-<details>
-<summary>How can you print information on the BIOS, motherboard, processor and RAM?</summary><br><b>
-
-dmidecoode
-</b></details>
-
-<details>
-<summary>How can you print all the information on connected block devices in your system?</summary><br><b>
-
-lsblk
-</b></details>
-
-<details>
-<summary>True or False? In user space, applications don't have full access to hardware resources</summary><br><b>
-
-True. Only in kernel space they have full access to hardware resources.
-</b></details>
 
 <a name="questions-linux-namespaces"></a>
 ### Namespaces
 
-<details>
-<summary>What types of namespaces are there in Linux?</summary><br><b>
-
-  - Process ID namespaces: these namespaces include independent set of process IDs
-  - Mount namespaces: Isolation and control of mountpoints
-  - Network namespaces: Isolates system networking resources such as routing table, interfaces, ARP table, etc.
-  - UTS namespaces: Isolate host and domains
-  - IPC namespaces: Isolates interprocess communications
-  - User namespaces: Isolate user and group IDs
-  - Time namespaces: Isolates time machine
-</b></details>
-
-<details>
-<summary>True or False? In every PID (Process ID) namespace the first process assigned with the process id number 1</summary><br><b>
-
-True. Inside the namespace it's PID 1 while to the parent namespace the PID is a different one.
-</b></details>
-
-<details>
-<summary>True or False? In a child PID namespace all processes are aware of parent PID namespace and processes and the parent PID namespace has no visibility of child PID namespace processes</summary><br><b>
-
-False. The opposite is true. Parent PID namespace is aware and has visibility of processes in child PID namespace and child PID namespace has no visibility as to what is going on in the parent PID namespace.
-</b></details>
-
-<details>
-<summary>True or False? By default, when creating two separate network namespaces, a ping from one namespace to another will work fine</summary><br><b>
-
-False. Network namespace has its own interfaces and routing table. There is no way (without creating a bridge for example) for one network namespace to reach another.
-</b></details>
-
-<details>
-<summary>True or False? With UTS namespaces, processes may appear as if they run on different hosts and domains while running on the same host</summary><br><b>
-
-True
-</b></details>
-
-<details>
-<summary>True or False? It's not possible to have a root user with ID 0 in child user namespaces</summary><br><b>
-
-False. In every child user namespace, it's possible to have a separate root user with uid of 0.
-</b></details>
-
-<details>
-<summary>What time namespaces are used for?</summary><br><b>
-
-In time namespaces processes can use different system time.
-</b></details>
 
 <a name="questions-linux-virtualization"></a>
 ### Virtualization
 
-<details>
-<summary>What virtualization solutions are available for Linux?</summary><br><b>
-
-  * [KVM](https://www.linux-kvm.org/page/Main_Page)
-  * [XEN](http://www.xen.org/)
-  * [VirtualBox](https://www.virtualbox.org/)
-  * [Linux-VServer](http://linux-vserver.org/Welcome_to_Linux-VServer.org)
-  * [User-mode Linux](http://user-mode-linux.sourceforge.net/)
-  * ...
-</b></details>
-
-<details>
-<summary>What is KVM?</summary><br><b>
-
-Is an open source virtualization technology used to operate on x86 hardware. 
-
-From the official [docs](https://www.linux-kvm.org/page/Main_Page)
-Recommended read:
-  * [Red Hat Article - What is KVM?](https://www.redhat.com/en/topics/virtualization/what-is-KVM)
-</b></details>
-
-<details>
-<summary>What is Libvirt?</summary><br><b>
-
-It's an open source collection of software used to manage virtual machines. It can be used with: KVM, Xen, LXC and others. It's also called Libvirt Virtualization API.
-
-From the official [docs](https://libvirt.org/)
-Hypervisor supported [docs](https://libvirt.org/drivers.html)
-</b></details>
-
-<a name="questions-linux-awk"></a>
-### AWK
-
-<details>
-<summary>What the <code>awk</code> command does? Have you used it? What for?</summary><br><b>
-
-From Wikipedia: "AWK is domain-specific language designed for text processing and typically used as a data extraction and reporting tool"
-</b></details>
-
-<details>
-<summary>How to print the 4th column in a file?</summary><br><b>
-
-`awk '{print $4}' file`
-</b></details>
-
-<details>
-<summary>How to print every line that is longer than 79 characters?</summary><br><b>
-
-`awk 'length($0) > 79' file`
-</b></details>
-
-<details>
-<summary>What the <code>lsof</code> command does? Have you used it? What for?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What is the difference between find and locate?</summary><br><b>
-</b></details>
-
-<details>
-<summary>How a user process performs a privileged operation, such as reading from the disk?</summary><br><b>
-
-Using system calls
-</b></details>
 
 <a name="questions-linux-system-calls"></a>
 ### System Calls
 
-<details>
-<summary>What is a system call? What system calls are you familiar with?</summary><br><b>
-</b></details>
-
-<details>
-<summary>How a program executes a system call?</summary><br><b>
-
-- A program executes a trap instruction. The instruction jump into the kernel while raising the privileged level to kernel space.
-- Once in kernel space, it can perform any privileged operation
-- Once it's finished, it calls a "return-from-trap" instruction which returns to user space while reducing back the privilege level to user space.
-</b></details>
-
-<details>
-<summary>Explain the fork() system call</summary><br><b>
-
-fork() is used for creating a new process. It does so by cloning the calling process but the child process has its own PID and any memory locks, I/O operations and semaphores are not inherited.
-</b></details>
-
-<details>
-<summary>What is the return value of fork()?</summary><br><b>
-
-  - On success, the PID of the child process in parent and 0 in child process
-  - On error, -1 in the parent
-</b></details>
-
-<details>
-<summary>Name one reason for fork() to fail</summary><br><b>
-
-Not enough memory to create a new process
-</b></details>
-
-<details>
-<summary>Why do we need the wait() system call?</summary><br><b>
-
-wait() is used by a parent process to wait for the child process to finish execution.
-If wait is not used by a parent process then a child process might become a zombie process.
-</b></details>
-
-<details>
-<summary>How the kernel notifies the parent process about child process termination?</summary><br><b>
-
-The kernel notifies the parent by sending the SIGCHLD to the parent.
-</b></details>
-
-<details>
-<summary>How the waitpid() is different from wait()?</summary><br><b>
-
-The waitpid() is a non-blocking version of the wait() function.<br>
-It also supports using library routine (e.g. system()) to wait a child process without messing up with other children processes for which the process has not waited.
-</b></details>
-
-<details>
-<summary>True or False? The wait() system call won't return until the child process has run and exited</summary><br><b>
-
-True in most cases though there are cases where wait() returns before the child exits.
-</b></details>
-
-<details>
-<summary>Explain the exec() system call</summary><br><b>
-
-It transforms the current running program into another program.<br>
-Given the name of an executable and some arguments, it loads the code and static data from the specified executable and overwrites its current code segment and current static code data. After initializing its memory space (like stack and heap) the OS runs the program passing any arguments as the argv of that process.
-</b></details>
-
-<details>
-<summary>True or False? A successful call to exec() never returns</summary><br><b>
-
-True<br>
-Since a successful exec replace the current process, it can't return anything to the process that made the call.
-</b></details>
-
-<details>
-<summary>What system call is used for listing files?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What system calls are used for creating a new process?</summary><br><b>
-
-fork(), exec() and the wait() system call is also included in this workflow.
-</b></details>
-
-<details>
-<summary>What execve() does?</summary><br><b>
-
-Executes a program. The program is passed as a filename (or path) and must be a binary executable or a script.
-</b></details>
-
-<details>
-<summary>What is the return value of malloc?</summary><br><b>
-</b></details>
-
-<details>
-<summary>Explain the pipe() system call. What does it used for?</summary><br><b>
-
-[Unix pipe implementation](https://toroid.org/unix-pipe-implementation)
-
-"Pipes provide a unidirectional interprocess communication channel. A pipe has a read end and a write end. Data written to the write end of a pipe can be read from the read end of the pipe.
-A pipe is created using pipe(2), which returns two file descriptors, one referring to the read end of the pipe, the other referring to the write end."
-</b></details>
-
-<details>
-<summary>What happens when you execute <code>ls -l</code>?</summary><br><b>
-
-* Shell reads the input using getline() which reads the input file stream and stores into a buffer as a string
-* The buffer is broken down into tokens and stored in an array this way: {"ls", "-l", "NULL"}
-* Shell checks if an expansion is required (in case of ls *.c)
-
-* Once the program in memory, its execution starts. First by calling readdir()
-
-Notes:
-
-* getline() originates in GNU C library and used to read lines from input stream and stores those lines in the buffer
-</b></details>
-
-<details>
-<summary>What happens when you execute <code>ls -l *.log</code>?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What readdir() system call does?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What exactly the command <code>alias x=y</code> does?</summary><br><b>
-</b></details>
-
-<details>
-<summary>Why running a new program is done using the fork() and exec() system calls? why a different API wasn't developed where there is one call to run a new program?</summary><br><b>
-
-This way provides a lot of flexibility. It allows the shell for example, to run code after the call to fork() but before the call to exec(). Such code can be used to alter the environment of the program it about to run.
-</b></details>
-
-<details>
-<summary>Describe shortly what happens when you execute a command in the shell</summary><br><b>
-
-The shell figures out, using the PATH variable, where the executable of the command resides in the filesystem. It then calls fork() to create a new child process for running the command. Once the fork was executed successfully, it calls a variant of exec() to execute the command and finally, waits the command to finish using wait(). When the child completes, the shell returns from wait() and prints out the prompt again.
-</b></details>
 
 <a name="questions-linux-fs-files"></a>
 ### Filesystem & Files
 
-<details>
-<summary>How to create a file of a certain size?</summary><br><b>
-
-There are a couple of ways to do that:
-
-  * dd if=/dev/urandom of=new_file.txt bs=2MB count=1
-  * truncate -s 2M new_file.txt
-  * fallocate -l 2097152 new_file.txt
-</b></details>
-
-<details>
-<summary>What does the following block do?:
-
-```
-open("/my/file") = 5
-read(5, "file content")
-```
-</summary><br><b>
-
-These system calls are reading the file <code>/my/file</code> and 5 is the file descriptor number.
-</b></details>
-
-<details>
-<summary>Describe three different ways to remove a file (or its content)</summary><br><b>
-</b></details>
-
-<details>
-<summary>What is the difference between a process and a thread?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What is context switch?</summary><br><b>
-
-From [wikipedia](https://en.wikipedia.org/wiki/Context_switch): a context switch is the process of storing the state of a process or thread, so that it can be restored and resume execution at a later point
-</b></details>
-
-<details>
-<summary>You found there is a server with high CPU load but you didn't find a process with high CPU. How is that possible?</summary><br><b>
-</b></details>
 
 <a name="questions-linux-advanced-networking"></a>
 ### Advanced Networking
-
-<details>
-<summary>When you run <code>ip a</code> you see there is a device called 'lo'. What is it and why do we need it?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What the <code>traceroute</code> command does? How does it works?</summary><br><b>
-
-Another common way to task this questions is "what part of the tcp header does traceroute modify?"
-</b></details>
-
-<details>
-<summary>What is network bonding? What types are you familiar with?</summary><br><b>
-</b></details>
-
-<details>
-<summary>How to link two separate network namespaces so you can ping an interface on one namespace from the second one?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What are cgroups?</summary><br><b>
-</b></details>
-
-<details>
-<summary>Explain Process Descriptor and Task Structure</summary><br><b>
-</b></details>
-
-<details>
-<summary>What are the differences between threads and processes?</summary><br><b>
-</b></details>
-
-<details>
-<summary>Explain Kernel Threads</summary><br><b>
-</b></details>
-
-<details>
-<summary>What happens when socket system call is used?</summary><br><b>
-
-This is a good article about the topic: https://ops.tips/blog/how-linux-creates-sockets
-</b></details>
-
-<details>
-<summary>You executed a script and while still running, it got accidentally removed. Is it possible to restore the script while it's still running?</summary><br><b>
-It is possible to restore a script while it's still running if it has been accidentally removed. The running script process still has the code in memory. You can use the /proc filesystem to retrieve the content of the running script.
-1.Find the Process ID by running 
-```
-ps aux | grep yourscriptname.sh
-```
-Replace yourscriptname.sh with your script name.
-2.Once you have the PID, you can access the script's memory through the /proc filesystem. The script will be available at /proc/<PID>/fd/, where <PID> is the process ID of the running script. Typically, the script's file descriptor is 0 or 1.
-
-You can copy the script content to a new file using the cp command:
-```
-cp /proc/<PID>/fd/0 /path_to_restore_your_file/yourscriptname.sh
-```
-Replace <PID> with the actual PID of the  script and /path_to_restore_your_file/yourscriptname.sh with the path where you want to restore the script.
 
 </b></details>
 
 <a name="questions-linux-memory"></a>
 ### Memory
 
-<details>
-<summary>What is the difference between MemFree and MemAvailable in /proc/meminfo?</summary><br><b>
-
-MemFree - The amount of unused physical RAM in your system
-MemAvailable - The amount of available memory for new workloads (without pushing system to use swap) based on MemFree, Active(file), Inactive(file), and SReclaimable.
-</b></details>
-
-<details>
-<summary>What is the difference between paging and swapping?</summary><br><b>
-</b></details>
-
-<details>
-<summary>Explain what is OOM killer</summary><br><b>
-</b></details>
 
 <a name="questions-linux-distributions"></a>
 ### Distributions
 
-<details>
-<summary>What is a Linux distribution?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What Linux distributions are you familiar with?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What are the components of a Linux distribution?</summary><br><b>
-
-* Kernel
-* Utilities
-* Services
-* Software/Packages Management
-</b></details>
 
 <a name="questions-linux-sed"></a>
 ### Sed
 
-<details>
-<summary>Using sed, extract the date from the following line: <code>201.7.19.90 - - [05/Jun/1985:13:42:99 +0000] "GET /site HTTP/1.1" 200 32421</code></summary><br><b>
-
-`echo $line | sed 's/.*\[//g;s/].*//g;s/:.*//g'`
-</b></details>
-
 <a name="questions-linux-misc"></a>
 ### Misc
-
-<details>
-<summary>What is a Linux distribution?</summary><br><b>
-
-* A collection of packages - kernel, GNU, third party apps, ...
-* Sometimes distributions store some information on the distribution in `/etc/*-release` file
-    * For example for Red Hat distribution it will be `/etc/redhat-release` and for Amazon it will be `/etc/os-release`
-    * `lsb_release` is a common command you can use in multiple different distributions
-</b></details>
-
-<details>
-<summary>Name 5 commands which are two letters long</summary><br><b>
-
-ls, wc, dd, df, du, ps, ip, cp, cd ...
-</b></details>
-
-<details>
-<summary>What ways are there for creating a new empty file?</summary><br><b>
-
-  * touch new_file
-  * echo "" > new_file
-</b></details>
-
-<details>
-<summary>How `cd -` works? How does it knows the previous location?</summary><br><b>
-
-$OLDPWD
-</b></details>
 
 <details>
 <summary>List three ways to print all the files in the current directory</summary><br><b>
@@ -2260,63 +936,13 @@ For these we can use `wc` command.
 </b></details>
 
 <details>
-<summary>You define x=2 in /etc/bashrc and x=6 ~/.bashrc you then login to the system. What would be the value of x?</summary><br><b>
-</b></details>
-
-<details>
 <summary>What is the difference between man and info?</summary><br><b>
 
 A good answer can be found [here](https://askubuntu.com/questions/9325/what-is-the-difference-between-man-and-info-documentation)
 </b></details>
 
 <details>
-<summary>Explain "environment variables". How do you list all environment variables?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What is a TTY device?</summary><br><b>
-</b></details>
-
-<details>
 <summary>How to create your own environment variables?</summary><br><b>
 
 `X=2` for example. But this will persist to new shells. To have it in new shells as well, use `export X=2`
-</b></details>
-
-<details>
-<summary>What a double dash (--) mean?</summary><br><b>
-
-It's used in commands to mark the end of commands options. One common example is when used with git to discard local changes: `git checkout -- some_file`
-</b></details>
-
-<details>
-<summary>Wildcards are implemented on user or kernel space?</summary><br><b>
-</b></details>
-
-<details>
-<summary>If I plug a new device into a Linux machine, where on the system, a new device entry/file will be created?</summary><br><b>
-
-/dev
-</b></details>
-
-<details>
-<summary>Why there are different sections in man? What is the difference between the sections?</summary><br><b>
-</b></details>
-
-<details>
-<summary>What is User-mode Linux?</summary><br><b>
-In Linux, user mode is a restricted operating mode in which a user's application or process runs. User mode is a non-privileged mode that prevents user-level processes from accessing sensitive system resources directly.
-
-In user mode, an application can only access hardware resources indirectly, by calling system services or functions provided by the operating system. This ensures that the system's security and stability are maintained by preventing user processes from interfering with or damaging system resources.
-
-Additionally, user mode also provides memory protection to prevent applications from accessing unauthorized memory locations. This is done by assigning each process its own virtual memory space, which is isolated from other processes.
-
-In contrast to user mode, kernel mode is a privileged operating mode in which the operating system's kernel has full access to system resources, and can perform low-level operations, such as accessing hardware devices and managing system resources directly.
-
-</b></details>
-
-<details>
-<summary>Under which license Linux is distributed? </summary><br><b>
-
-GPL v2
 </b></details>
